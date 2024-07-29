@@ -18,4 +18,4 @@ def register(request):
 
 @login_required
 def profile_view(request):
-    return render(request, 'authorization/profile.html')
+    return render(request, 'authorization/profile.html', {'user': request.user})
