@@ -1,0 +1,18 @@
+
+
+{% block content %}
+<h1>User List</h1>
+
+<form method="get" action="{% url 'user_list' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for user in users %}
+        <li>{{ user.username }}</li>
+    {% empty %}
+        <li>No users found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
