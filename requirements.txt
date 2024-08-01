@@ -1,0 +1,7 @@
+netifaces==0.10.4
+pycairo==1.26.1
+pycups==2.0.4
+PyGObject==3.48.2
+Django==4.2
+djangorestframework==3.14
+psycopg2-binary==2.9
