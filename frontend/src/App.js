@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import CookieForm from './components/CookieForm';
 import PostList from './components/PostList';
 import CreatePost from './components/CreatePost';
+import About from './components/About';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/cookie" element={<CookieForm />} />
                 <Route path="/postCreate" element={<CreatePost />} />
                 <Route path="/postList" element={<PostList />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </Router>
     );
