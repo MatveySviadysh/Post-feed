@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView
 
 from .forms import UserSearchForm
+from django.http import HttpResponse
 
 def home(request):
     return render(request, 'shatl/home.html')   
@@ -24,3 +25,15 @@ class UserListView(ListView):
         context = super().get_context_data(**kwargs)
         context['form'] = UserSearchForm(self.request.GET or None)
         return context
+    
+
+
+
+def set_cookie_view(request):
+    response = HttpResponse("Setting a cookie")
+    response.set_cookie('my_cookie', 'cookie_value', max_age=3600, samesite='Lax', secure=False)
+    return response
+
+def get_cookie_view(request):
+    cookie_value = request.COOKIES.get('my_cookie')
+    return HttpResponse(f"The value of the cookie is: {cookie_value}")
