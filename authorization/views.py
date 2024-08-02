@@ -5,18 +5,23 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer, RegisterSerializer
 from django.contrib.auth import authenticate
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
+
 class ProfileView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
-def profile_view(request):
-    pass
+    def get_object(self):
+        return self.request.user
+
+
 
 class LoginView(generics.GenericAPIView):
     permission_classes = (AllowAny,)
@@ -32,3 +37,5 @@ class LoginView(generics.GenericAPIView):
                 "access": str(token.access_token),
             })
         return Response({"error": "Invalid credentials"}, status=400)
+
+
