@@ -5,6 +5,8 @@ import Login from './components/Login';
 import Main from './components/Main';
 import Profile from './components/Profile';
 import CookieForm from './components/CookieForm';
+import PostList from './components/PostList';
+import CreatePost from './components/CreatePost';
 
 function App() {
     return (
@@ -15,6 +17,8 @@ function App() {
                 <Route path="/main" element={<Main />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/cookie" element={<CookieForm />} />
+                <Route path="/postCreate" element={<CreatePost />} />
+                <Route path="/postList" element={<PostList />} />
             </Routes>
         </Router>
     );
