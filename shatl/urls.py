@@ -13,5 +13,5 @@ urlpatterns = [
     path('auth/', include('authorization.urls')),
     path('set-cookie/', views.set_cookie_view, name='set_cookie'),
     path('get-cookie/', views.get_cookie_view, name='get_cookie'),
-    path('posts/', include('appPost.urls'))
+    path('posts/', include('appPost.urls')),  
 ]
