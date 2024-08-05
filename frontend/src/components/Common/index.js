@@ -1,0 +1,10 @@
+export { default as About } from '../About';
+export { default as CookieForm } from './CookieForm';
+export { default as Login } from '../Auth/Login';
+export { default as Main } from '../Main';
+export { default as PostCreate } from '../Posts/PostCreate';
+export { default as PostList } from '../Posts/PostList';
+export { default as Profile } from '../Profile';
+export { default as Register } from '../Auth/Register';
+export { default as Layout } from '../Layout/Layout';
+export { default as NavBar } from './NavBar';
