@@ -37,3 +37,18 @@ def set_cookie_view(request):
 def get_cookie_view(request):
     cookie_value = request.COOKIES.get('my_cookie')
     return HttpResponse(f"The value of the cookie is: {cookie_value}")
+
+def create_post(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        image = request.FILES.get('image')
+
+        post = Post.objects.create(title=title, content=content, image=image)
+        return JsonResponse({'message': 'Post created successfully!'})
+
+def list_posts(request):
+    if request.method == 'GET':
+        posts = Post.objects.all()
+        posts_data = [{'id': post.id, 'title': post.title, 'content': post.content, 'image': post.image.url if post.image else None} for post in posts]
+        return JsonResponse(posts_data, safe=False)
