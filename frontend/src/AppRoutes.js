@@ -9,11 +9,13 @@ import PostCreate from './components/Posts/PostCreate';
 import PostList from './components/Posts/PostList';
 import About from './components/About';
 import Layout from './components/Layout/Layout';
+import Multiply from './Multiply';
 
 const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
+                <Route path="/multiply" component={Multiply} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/main" element={<Main />} />
