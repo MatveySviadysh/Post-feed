@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from .views import home
 from . import views  
 from authorization import urls
-
+from .views import create_post, list_posts
 from .views import UserListView
 
 urlpatterns = [
@@ -15,4 +15,6 @@ urlpatterns = [
     path('get-cookie/', views.get_cookie_view, name='get_cookie'),
     path('posts/', include('appPost.urls')),  
     path('api/', include('process.urls')), 
+    path('posts/create/', create_post, name='create_post'),
+    path('posts/', list_posts, name='list_posts'),
 ]

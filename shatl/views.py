@@ -2,7 +2,8 @@ from django.shortcuts import render
 
 from django.contrib.auth.models import User
 from django.views.generic import ListView
-
+from django.http import JsonResponse
+from posts.models import Post
 from .forms import UserSearchForm
 from django.http import HttpResponse
 
@@ -45,10 +46,9 @@ def create_post(request):
         image = request.FILES.get('image')
 
         post = Post.objects.create(title=title, content=content, image=image)
-        return JsonResponse({'message': 'Post created successfully!'})
+        return JsonResponse({'id': post.id, 'title': post.title, 'content': post.content, 'image': post.image.url if post.image else None})
 
 def list_posts(request):
-    if request.method == 'GET':
-        posts = Post.objects.all()
-        posts_data = [{'id': post.id, 'title': post.title, 'content': post.content, 'image': post.image.url if post.image else None} for post in posts]
-        return JsonResponse(posts_data, safe=False)
+    posts = Post.objects.all()
+    posts_data = [{'id': post.id, 'title': post.title, 'content': post.content, 'image': post.image.url if post.image else None} for post in posts]
+    return JsonResponse(posts_data, safe=False)
