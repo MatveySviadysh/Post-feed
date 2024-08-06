@@ -10,6 +10,7 @@ import PostList from './components/Posts/PostList';
 import About from './components/About';
 import Layout from './components/Layout/Layout';
 import Multiply from './Multiply';
+import NotificationList from './components/Notification/NotificationList';
 
 const AppRoutes = () => {
     return (
@@ -24,6 +25,7 @@ const AppRoutes = () => {
                 <Route path="/post_create" element={<PostCreate />} />
                 <Route path="/posts" element={<PostList />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/notification" element={<NotificationList />} />
             </Route>
         </Routes>
     );

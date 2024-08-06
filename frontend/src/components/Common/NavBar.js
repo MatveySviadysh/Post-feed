@@ -22,6 +22,7 @@ const NavBar = () => (
             <li><Link to="/post_create">Post Create</Link></li>
             <li><Link to="/posts">Posts</Link></li>
             <li><Link to="/about">About</Link></li>
+            <li><Link to="/notification">notification</Link></li>
         </Ul>
     </Nav>
 );
