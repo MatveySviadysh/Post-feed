@@ -14,7 +14,7 @@ urlpatterns = [
     path('set-cookie/', views.set_cookie_view, name='set_cookie'),
     path('get-cookie/', views.get_cookie_view, name='get_cookie'),
     path('posts/', include('appPost.urls')),  
-    path('api/', include('process.urls')), 
+    path('process/', include('process.urls')),
 ]
 
 if settings.DEBUG:
