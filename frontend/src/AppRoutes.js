@@ -11,6 +11,7 @@ import About from './components/About';
 import Layout from './components/Layout/Layout';
 import Multiply from './Multiply';
 import NotificationList from './components/Notification/NotificationList';
+import PostDetail from './components/Posts/PostDetail';
 
 const AppRoutes = () => {
     return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
                 <Route path="/posts" element={<PostList />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/notification" element={<NotificationList />} />
+                <Route path="/posts/:postId" element={<PostDetail />} />
             </Route>
         </Routes>
     );

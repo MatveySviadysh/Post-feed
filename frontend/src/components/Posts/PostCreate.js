@@ -27,7 +27,7 @@ const PostCreate = ({ onPostCreated }) => {
             }
 
             // Перенаправление на страницу main
-            window.location.href = '/main';
+            window.location.href = '/posts';
         } catch (error) {
             console.error("There was an error creating the post!", error);
         }
