@@ -1,7 +1,10 @@
-# multiply/urls.py
-from django.urls import path
-from .views import multiply_by_two
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import NotificationViewSet
+
+router = DefaultRouter()
+router.register(r'notifications', NotificationViewSet, basename='notification')
 
 urlpatterns = [
-    path('multiply/', multiply_by_two, name='multiply_by_two'),
+    path('', include(router.urls)),
 ]
