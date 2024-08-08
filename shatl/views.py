@@ -6,6 +6,9 @@ from django.views.generic import ListView
 from .forms import UserSearchForm
 from django.http import HttpResponse
 
+from rest_framework import viewsets
+from .serializers import UserSerializer
+
 def home(request):
     return render(request, 'shatl/home.html')   
 
@@ -37,3 +40,9 @@ def set_cookie_view(request):
 def get_cookie_view(request):
     cookie_value = request.COOKIES.get('my_cookie')
     return HttpResponse(f"The value of the cookie is: {cookie_value}")
+
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

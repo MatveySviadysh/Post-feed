@@ -1,4 +1,4 @@
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
 import json
@@ -12,7 +12,6 @@ def process_request(request):
             if number is None:
                 return HttpResponseBadRequest("Missing 'number' in request body")
 
-            # Отправка запроса на сервер notification
             response = requests.post('http://localhost:8001/api/multiply/', json={'number': number})
             if response.status_code == 200:
                 result = response.json().get('result')
