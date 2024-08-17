@@ -9,20 +9,20 @@ function Profile() {
         const fetchProfile = async () => {
             const token = localStorage.getItem('access');
             if (!token) {
-                setError('No token found');
+                setError('Токен не найден');
                 return;
             }
 
             try {
                 const response = await axios.get('http://localhost:8000/auth/profile/', {
                     headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 setUser(response.data);
-            } catch (error) {
-                console.error(error);
-                setError('Failed to fetch user profile');
+            } catch (err) {
+                console.error('Ошибка при получении профиля:', err);
+                setError('Не удалось получить профиль пользователя');
             }
         };
 
@@ -33,17 +33,15 @@ function Profile() {
         return <div>{error}</div>;
     }
 
+    if (!user) {
+        return <div>Загрузка...</div>;
+    }
+
     return (
         <div>
-            {user ? (
-                <div>
-                    <h1>Profile</h1>
-                    <p>Username: {user.username}</p>
-                    <p>Email: {user.email}</p>
-                </div>
-            ) : (
-                <div>Loading...</div>
-            )}
+            <h1>Профиль</h1>
+            <p>Имя пользователя: {user.username}</p>
+            <p>Email: {user.email}</p>
         </div>
     );
 }
