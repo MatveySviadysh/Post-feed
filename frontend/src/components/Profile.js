@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Profile.scss';
 
 function Profile() {
     const [user, setUser] = useState(null);
@@ -38,12 +39,19 @@ function Profile() {
     }
 
     return (
-        <div>
-            <h1>Профиль</h1>
-            <p>Имя пользователя: {user.username}</p>
-            <p>Email: {user.email}</p>
+        <div className="profile-container">
+            <div className="profile-card">
+                <h2 className="profile-title">User Profile</h2>
+                {/* <img src={user.avatar} alt="User Avatar" className="profile-avatar" /> */}
+                <div className="profile-info">
+                    <p><strong>Name:</strong> {user.username}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                </div>
+                <button className="change-user-button">edit acount</button>
+            </div>
         </div>
     );
+
 }
 
 export default Profile;
