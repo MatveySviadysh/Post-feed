@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
 
             console.log("Login successful! Tokens saved."); 
             
-            onLogin(); 
+            //onLogin(); 
             navigate('/profile'); 
         } catch (err) {
             console.error("Login failed: ", err.response ? err.response.data : err.message); 
