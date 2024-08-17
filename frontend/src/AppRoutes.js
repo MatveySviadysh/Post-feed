@@ -13,7 +13,7 @@ import Layout from './components/Layout/Layout';
 //import NotificationList from './components/Notification/NotificationList';
 import PostDetail from './components/Posts/PostDetail';
 //import ChatComponent from './components/Chat/ChatComponent';
-
+import PostLine from './components/Posts/PostsLine'
 
 
 const AppRoutes = ({ onLogin, onLogout, isAuthenticated }) => {
@@ -28,6 +28,7 @@ const AppRoutes = ({ onLogin, onLogout, isAuthenticated }) => {
                 {/* <Route path="/cookie" element={<CookieForm />} /> */}
                 <Route path="/post_create" element={<PostCreate />} />
                 <Route path="/posts" element={<PostList />} />
+                <Route path="/posts_line" element={<PostLine />} />
                 <Route path="/about" element={<About />} />
                 {/* <Route path="/notification" element={<NotificationList />} /> */}
                 <Route path="/posts/:postId" element={<PostDetail />} />
