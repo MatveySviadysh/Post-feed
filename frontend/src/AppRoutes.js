@@ -14,10 +14,12 @@ import Layout from './components/Layout/Layout';
 import PostDetail from './components/Posts/PostDetail';
 //import ChatComponent from './components/Chat/ChatComponent';
 
-const AppRoutes = () => {
+
+
+const AppRoutes = ({ onLogin, onLogout, isAuthenticated }) => {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout onLogin={onLogin} onLogout={onLogout} isAuthenticated={isAuthenticated} />}>
                 {/* <Route path="/multiply" component={Multiply} /> */}
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

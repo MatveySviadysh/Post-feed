@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import NavBar from '../Common/NavBar';
 import styled from 'styled-components';
 
-    const PageContainer = styled.div`
+const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Гарантирует, что контейнер занимает всю высоту страницы */
@@ -17,9 +17,9 @@ const MainContent = styled.main`
     padding: 20px; /* Отступы вокруг контента */
 `;
 
-const Layout = () => (
+const Layout = ({ onLogin, onLogout, isAuthenticated }) => (
     <PageContainer>
-        <NavBar />
+        <NavBar onLogin={onLogin} onLogout={onLogout} isAuthenticated={isAuthenticated} />
         <MainContent>
             <Outlet />
         </MainContent>
