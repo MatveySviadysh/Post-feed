@@ -20,7 +20,7 @@ const PostList = () => {
                 <div key={post.id} className="post">
                     <h2>{post.title}</h2>
                     <p>{post.content}</p>
-                    {post.image && <img src={post.image} alt={post.title} />}
+                    {post.image && <img src={post.image} alt={post.title} width={100} height={100} />}
                     <p><strong>Author:</strong> {post.author}</p>
                     <p><small>{new Date(post.created_at).toLocaleString()}</small></p>
                 </div>
