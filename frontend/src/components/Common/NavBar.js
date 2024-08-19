@@ -1,4 +1,3 @@
-//import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -48,6 +47,7 @@ const NavBar = ({ onLogout, isAuthenticated }) => {
                         <li><button onClick={onLogout}>Logout</button></li>
                     </>
                 )}
+                 <li><StyledLink to="/posts_line">Posts line</StyledLink></li>
                 <li><StyledLink to="/posts">Posts</StyledLink></li>
                 <li><StyledLink to="/about">About</StyledLink></li>
             </Ul>
