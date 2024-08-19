@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .serializers import UserSerializer, RegisterSerializer
+from rest_framework.views import APIView
+from rest_framework import status
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -46,3 +48,16 @@ class LoginView(generics.GenericAPIView):
             })
         print("Invalid credentials")  # Отладка
         return Response({"error": "Invalid credentials"}, status=400)
+
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        user_data = {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+        }
+        return Response(user_data, status=status.HTTP_200_OK)
