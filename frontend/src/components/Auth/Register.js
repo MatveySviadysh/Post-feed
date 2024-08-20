@@ -11,7 +11,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/auth/register/', {
+        axios.post('http://localhost:8000/api/auth/register/', {
             username,
             email,
             password,
@@ -19,7 +19,7 @@ const Register = () => {
         })
         .then(response => {
             console.log(response.data);
-            navigate('/main');  // Перенаправление на главную страницу
+            navigate('/main');  
         })
         .catch(error => {
             console.error(error);

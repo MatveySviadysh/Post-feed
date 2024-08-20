@@ -15,7 +15,7 @@ const PostCreate = ({ onPostCreated }) => {
                 formData.append('image', newPost.image);
             }
 
-            await axios.post('http://localhost:8000/posts/create/', formData, {
+            await axios.post('http://localhost:8000/api/posts/create/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }

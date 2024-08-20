@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const PostList = () => {
     const [posts, setPosts] = useState([]);
-    const [user, setUser] = useState(null);  
+    const [setUser] = useState(null);  
     const token = localStorage.getItem('access');
 
     useEffect(() => {
@@ -14,20 +14,20 @@ const PostList = () => {
         }
     })
     .then(response => {
-        setUser(response.data);  // Установите данные пользователя
+        setUser(response.data);  
     })
     .catch(error => {
         console.error('Error fetching user data:', error);
     });
 
-    axios.get('http://localhost:8000/posts/posts_line/')
+    axios.get('http://localhost:8000/api/posts/posts_line/')
         .then(response => {
             setPosts(response.data);
         })
         .catch(error => {
             console.error('There was an error fetching the posts!', error);
         });
-}, []);
+},  );
 
 
     const handleLike = (postId) => {
@@ -36,7 +36,7 @@ const PostList = () => {
         //     return;
         // }
 
-        axios.post(`http://localhost:8000/posts/${postId}/like/`)  // Измените на правильный эндпоинт
+        axios.post(`http://localhost:8000/api/posts/${postId}/like/`)  
             .then(response => {
                 setPosts(posts.map(post => 
                     post.id === postId ? { ...post, likes: response.data.likes, liked: true } : post
