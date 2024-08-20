@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny,IsAuthenticatedOrReadOnly,IsAuth
 from rest_framework import viewsets, generics, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.core.cache import cache
 
 class PostCreate(generics.ListCreateAPIView):
     queryset = Post.objects.all().order_by('-created_at')
@@ -19,6 +20,17 @@ class PostList(generics.ListAPIView):
     queryset = Post.objects.all().order_by('-created_at')
     serializer_class = PostSerializer
 
+    def list(self, request, *args, **kwargs):
+        cache_key = 'posts_list'
+        cached_posts = cache.get(cache_key)
+
+        if cached_posts is None:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            cached_posts = serializer.data
+            cache.set(cache_key, cached_posts, timeout=60*15)  # 15 minutes
+
+        return Response(cached_posts)
 
 class PostDetail(generics.RetrieveDestroyAPIView):
     queryset = Post.objects.all()
