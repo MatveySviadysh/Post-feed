@@ -10,7 +10,7 @@ const PostList = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/posts/');
+                const response = await axios.get('http://localhost:8000/api/posts/');
                 console.log('Fetched posts:', response.data); // Добавлено логирование
                 setPosts(response.data);
             } catch (error) {
@@ -24,7 +24,7 @@ const PostList = () => {
     const handleDelete = async (postId) => {
         console.log("Deleting post with ID:", postId);
         try {
-            await axios.delete(`http://localhost:8000/posts/${postId}/`);
+            await axios.delete(`http://localhost:8000/api/posts/${postId}/`);
             setPosts(posts.filter(post => post.id !== postId));
         } catch (error) {
             console.error("There was an error deleting the post!", error);
