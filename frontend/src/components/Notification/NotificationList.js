@@ -5,8 +5,10 @@ const Notifications = () => {
     const [notifications, setNotifications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [ws, setWs] = useState(null);
 
     useEffect(() => {
+        // Функция для получения уведомлений через API
         const fetchNotifications = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:8001/api/notifications/');
@@ -19,7 +21,37 @@ const Notifications = () => {
         };
 
         fetchNotifications();
-    }, []);
+
+        // Подключение к WebSocket
+        const socket = new WebSocket('ws://localhost:8001/ws/notifications/');
+
+        socket.onopen = () => {
+            console.log('WebSocket connection established');
+        };
+
+        socket.onmessage = (event) => {
+            const notification = JSON.parse(event.data);
+            setNotifications((prevNotifications) => [notification, ...prevNotifications]);
+        };
+
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        socket.onclose = (event) => {
+            console.log('WebSocket connection closed:', event);
+        };
+
+        // Сохраняем сокет в состоянии компонента
+        setWs(socket);
+
+        // Очистка при размонтировании компонента
+        return () => {
+            if (ws) {
+                ws.close();
+            }
+        };
+    }, [ws]);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
