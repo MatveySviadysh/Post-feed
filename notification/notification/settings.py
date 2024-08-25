@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'multiply',
     'rest_framework',
     'corsheaders',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,5 @@ CORS_ALLOW_METHODS = [
     'DELETE',
     'OPTIONS',
 ]
+
+ASGI_APPLICATION = 'notification.asgi.application'

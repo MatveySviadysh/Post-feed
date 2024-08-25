@@ -7,6 +7,8 @@ from rest_framework import viewsets
 from .models import Notification
 from .serializers import NotificationSerializer
 
+from .producer import send_notification_to_kafka
+
 @csrf_exempt
 def multiply_by_two(request):
     if request.method == 'POST':
@@ -29,3 +31,15 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Notification.objects.all()
+
+    def perform_create(self, serializer):
+        notification = serializer.save()
+        notification_data = {
+            'id': notification.id,
+            'user_id': notification.user_id,
+            'subject': notification.subject,
+            'body': notification.body,
+            'sent_at': notification.sent_at.isoformat(),
+            'read': notification.read,
+        }
+        send_notification_to_kafka(notification_data)
