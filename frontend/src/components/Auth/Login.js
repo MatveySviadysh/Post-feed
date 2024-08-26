@@ -1,53 +1,62 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; 
 
-function Login() {
+const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const navigate = useNavigate();  
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault(); 
+        
+        console.log("Submitting form with POST request..."); 
+
         try {
-            const response = await axios.post('http://localhost:8000/auth/login/', {
+            const response = await axios.post('http://localhost:8000/api/auth/login/', {
                 username,
-                password
+                password,
             });
-            localStorage.setItem('access', response.data.access);
-            localStorage.setItem('refresh', response.data.refresh);
-            navigate('/profile');
-        } catch (error) {
-            setError('Invalid credentials');
+
+            const { access, refresh } = response.data;
+            localStorage.setItem('access', access);
+            localStorage.setItem('refresh', refresh);
+
+            console.log("Login successful! Tokens saved."); 
+            
+            //onLogin(); 
+            navigate('/profile'); 
+        } catch (err) {
+            console.error("Login failed: ", err.response ? err.response.data : err.message); 
+            setError('Invalid credentials'); 
         }
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                {error && <div>{error}</div>}
-                <button type="submit">Login</button>
-            </form>
-        </div>
+        <form onSubmit={handleLogin}>
+            <div>
+                <label>Username:</label>
+                <input 
+                    type="text" 
+                    value={username} 
+                    onChange={(e) => setUsername(e.target.value)} 
+                    required
+                />
+            </div>
+            <div>
+                <label>Password:</label>
+                <input 
+                    type="password" 
+                    value={password} 
+                    onChange={(e) => setPassword(e.target.value)} 
+                    required
+                />
+            </div>
+            {error && <div>{error}</div>}
+            <button type="submit">Login</button>
+        </form>
     );
-}
+};
 
 export default Login;

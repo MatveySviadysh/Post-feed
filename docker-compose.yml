@@ -1,12 +1,22 @@
 version: '3.8'
 
 services:
-  backend:
+
+  backend_shatle:
     build:
-      context: .
+      context: ./shatl
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+    
+  backend_notification:
+    build:
+      context: ./notification
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8001"
     depends_on:
       - db
 
